@@ -1,0 +1,14 @@
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\bin\Debug\net10.0\HospitalMS.exe
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\bin\Debug\net10.0\HospitalMS.deps.json
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\bin\Debug\net10.0\HospitalMS.runtimeconfig.json
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\bin\Debug\net10.0\HospitalMS.dll
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\bin\Debug\net10.0\HospitalMS.pdb
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.AssemblyInfoInputs.cache
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.AssemblyInfo.cs
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.csproj.CoreCompileInputs.cache
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.dll
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\refint\HospitalMS.dll
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.pdb
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.genruntimeconfig.cache
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\ref\HospitalMS.dll
