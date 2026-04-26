@@ -12,3 +12,4 @@ C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagement
 C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.pdb
 C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.genruntimeconfig.cache
 C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\ref\HospitalMS.dll
+C:\Users\MD SHAKHAYET HOSSAN\Desktop\CSE\CSE-143+144\BuildingAHospitalManagementSystem\HospitalMS\obj\Debug\net10.0\HospitalMS.sourcelink.json
