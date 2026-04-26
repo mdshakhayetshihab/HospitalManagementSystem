@@ -6,8 +6,10 @@ class GeneralPatient:Patient,IInsurable
  get{return _symptoms;}
  private set
  {
+    if(value==null)
+    throw new ArgumentNullException(nameof(Symptoms));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Symptomps cannot be empty.");
+ throw new ArgumentException("Symptoms cannot be empty.",nameof(Symptoms));
  _symptoms=value;
  }
  }
@@ -29,7 +31,7 @@ class GeneralPatient:Patient,IInsurable
  }
  public override void Diagnose()
  {
- Console.WriteLine($"[Diagnose] Patient #{patientId} {patientName} general checkup | symptoms: (Symptoms)");
+ Console.WriteLine($"[Diagnose] Patient #{patientId} {patientName} general checkup | symptoms: {Symptoms}");
  }
  public override void Treat()
  {

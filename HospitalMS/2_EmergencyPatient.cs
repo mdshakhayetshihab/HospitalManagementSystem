@@ -7,8 +7,10 @@ class EmergencyPatient : Patient,Itransferable
  get{return _EmergencyType;}
  private set
  {
+    if(value ==null)
+    throw new ArgumentNullException(nameof(EmergencyType));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Emergency type cannot be empty.");
+ throw new ArgumentException("Emergency type cannot be empty.",nameof(EmergencyType));
  _EmergencyType=value;
  }
  }

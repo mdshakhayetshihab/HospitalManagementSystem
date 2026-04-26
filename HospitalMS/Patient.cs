@@ -1,5 +1,4 @@
 using System;
-using System.Reflection.Metadata.Ecma335;
 abstract class Patient
 {
 private string _patientName;
@@ -10,18 +9,20 @@ public string patientName
  get{return _patientName;}
  set
  {
+    if(value==null)
+    throw new ArgumentNullException(nameof(patientName),"Patient name cannot be null");
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentNullException("Patient name cannot be empty or whitespace.");
+ throw new ArgumentException("Patient name cannot be empty or whitespace.",nameof(patientName));
  _patientName=value.Trim();
  }
  }
-public double setBillamount{get;protected set;}
-public Patient(string s,int i)
+//public double setBillamount{get;protected set;}
+public Patient(string s,int PatientId)
 {
 patientName=s;
-if(i<0)
-throw new ArgumentException("Patient Id must be positive");
-_patientId=i;
+if(PatientId<=0)
+throw new ArgumentOutOfRangeException(nameof(PatientId),PatientId,"patient ID must be a positive number.");
+_patientId=PatientId;
 AdmissionDate=DateTime.Now;
 }
 public int patientId
@@ -32,7 +33,7 @@ public int patientId
  protected void SetBillAmount(double amount)
  {
  if(amount<0)
- throw new ArgumentException("Bill amount cannot be negative.");
+ throw new ArgumentOutOfRangeException(nameof(amount),amount,"Bill amount cannot be negative.");
  Billamount=amount;
  }
 //public DateTime AdmissionDate {get;}

@@ -2,7 +2,7 @@ using System;
 class PediatricPatient : Patient,IInsurable
 {
  private string _gInsuranceId;
- public string _GurdianName;
+ private string _GurdianName;
  public string gInsuranceId
  {
  get{return _gInsuranceId;}
@@ -18,8 +18,10 @@ class PediatricPatient : Patient,IInsurable
  get{return _GurdianName;}
  private set
  {
+ if(value==null)
+ throw new ArgumentNullException(nameof(GurdianName));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Gurdian name cannot be empty");
+ throw new ArgumentException("Gurdian name cannot be empty",nameof(GurdianName));
  _GurdianName=value;
  }
  }
@@ -40,7 +42,7 @@ id)
  }
  public void ProcessInsurableClaim()
  {
- Console.WriteLine($"[Insurance] processing claim for {GurdianName}");
+ Console.WriteLine($"[Insurance] processing claim for {patientName}");
  Console.WriteLine($" Insurance Id: {gInsuranceId} | calim Amount: BDT {Billamount}");
  }
  public string GetInsuranceDetails()

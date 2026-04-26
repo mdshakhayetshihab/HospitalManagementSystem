@@ -8,8 +8,10 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  get{return _surgeryType;}
  private set
  {
+    if(value==null)
+    throw new ArgumentNullException(nameof(surgeryType));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Surgery type cannot be empty");
+ throw new ArgumentException("Surgery type cannot be empty",nameof(surgeryType));
  _surgeryType=value;
  }
  }
@@ -18,8 +20,10 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  get{return _SurgeonName;}
  private set
  {
+ if(value==null)
+ throw new ArgumentNullException(nameof(SurgeonName));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Surgeon name cannot be empty");
+ throw new ArgumentException("Surgeon name cannot be empty",nameof(SurgeonName));
  _SurgeonName=value;
  }
  }
@@ -42,7 +46,7 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  }
  public override void Diagnose()
  {
- Console.WriteLine($"[Diagnose] patient #{patientId} {patientName} :pre-surgical assesment for Appendectomy");
+ Console.WriteLine($"[Diagnose] patient #{patientId} {patientName} :pre-surgical assesment for {surgeryType}");
  }
  public override void Treat()
  {
@@ -51,8 +55,10 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  }
  public void ProcessInsurableClaim()
  {
+    if(Billamount<=0)
+    throw new InvalidOperationException($"Cannot process insurance for {patientName}: treatment has not been completed yet.");
  Console.WriteLine($"[Insurance] processing claim for {patientName}");
- Console.WriteLine($" Insurance Id: {InsuranceId} | calim Amount: BDT {Billamount}");
+ Console.WriteLine($" Insurance Id: {InsuranceId} | calim Amount: BDT {Billamount:N0}");
  }
  public string GetInsuranceDetails()
  {
@@ -68,6 +74,7 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  }
  public void ApplyDiscount(double percentage)
  {
- Billamount=Billamount-Billamount*(percentage/100);
+ //Billamount=Billamount-Billamount*(percentage/100);
+ SetBillAmount(Billamount-Billamount*(percentage/100));
  }
 }
