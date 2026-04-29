@@ -67,11 +67,18 @@ class EntryPoint
         Console.WriteLine($"\nTotal admitted: {admitted.Count} out of 4 attempted.");
         Console.WriteLine("\n======== Treatment Reports========");
         Console.WriteLine();
+        admitted.Add(null);
         foreach(Patient p in admitted)
         {
             try
             {
+                if(p==null)
+                throw new NullReferenceException("Patient reference is null");
                 p.GenerateReport();
+            }
+            catch(NullReferenceException ex)
+            {
+                Console.WriteLine($"[Error] Null patient fount: {ex.Message}");
             }
             catch(Exception ex)
             {
@@ -132,5 +139,8 @@ class EntryPoint
         }
         Console.WriteLine("\n======== Stack Trace Test========");
         StackTraceTest.RunTest();
+        Console.WriteLine($"========Test finally========");
+        Console.WriteLine($"{FinallyReturn.TestFinallyReturn()}");
+    
     }
 }
