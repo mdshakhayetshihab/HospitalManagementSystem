@@ -9,10 +9,8 @@ public string patientName
  get{return _patientName;}
  set
  {
-    if(value==null)
-    throw new ArgumentNullException(nameof(patientName),"Patient name cannot be null");
- if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Patient name cannot be empty or whitespace.",nameof(patientName));
+   if(string.IsNullOrWhiteSpace(value))
+   throw new InvalidPatientDataException("PatientName",value?? "null");
  _patientName=value.Trim();
  }
  }
@@ -21,7 +19,7 @@ public Patient(string s,int PatientId)
 {
 patientName=s;
 if(PatientId<=0)
-throw new ArgumentOutOfRangeException(nameof(PatientId),PatientId,"patient ID must be a positive number.");
+throw new InvalidPatientDataException("PatientId",patientId);
 _patientId=PatientId;
 AdmissionDate=DateTime.Now;
 }
@@ -33,7 +31,7 @@ public int patientId
  protected void SetBillAmount(double amount)
  {
  if(amount<0)
- throw new ArgumentOutOfRangeException(nameof(amount),amount,"Bill amount cannot be negative.");
+ throw new InvalidPatientDataException("BillAmount",amount);
  Billamount=amount;
  }
 //public DateTime AdmissionDate {get;}

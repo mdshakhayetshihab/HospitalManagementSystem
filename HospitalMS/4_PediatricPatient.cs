@@ -9,7 +9,7 @@ class PediatricPatient : Patient,IInsurable
  private set
  {
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("gurdian insurance id cannot be empty");
+ throw new InvalidPatientDataException("Gurdian name",value?? "null");
  _gInsuranceId=value;
  }
  }

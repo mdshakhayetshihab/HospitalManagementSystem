@@ -8,10 +8,8 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  get{return _surgeryType;}
  private set
  {
-    if(value==null)
-    throw new ArgumentNullException(nameof(surgeryType));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Surgery type cannot be empty",nameof(surgeryType));
+ throw new InvalidPatientDataException("Surgery type",value ?? "null");
  _surgeryType=value;
  }
  }
@@ -20,10 +18,8 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  get{return _SurgeonName;}
  private set
  {
- if(value==null)
- throw new ArgumentNullException(nameof(SurgeonName));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Surgeon name cannot be empty",nameof(SurgeonName));
+ throw new InvalidPatientDataException("Surgron name",value?? "null");
  _SurgeonName=value;
  }
  }
@@ -66,6 +62,9 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  }
  public void TransferTo(string department)
  {
+   Random rng=new Random();
+   if(rng.Next(0,3)==0)
+   throw new BedUnavailableException(department,20,20);
  Console.WriteLine($"[Transper] post -op : Moving {patientName} from ER to {department}");
  }
  public double CalculateBill()

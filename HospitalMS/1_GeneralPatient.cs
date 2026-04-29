@@ -7,10 +7,7 @@ class GeneralPatient:Patient,IInsurable
  private set
  {
     if(value==null)
-    throw new ArgumentNullException(nameof(Symptoms));
- if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Symptoms cannot be empty.",nameof(Symptoms));
- _symptoms=value;
+    throw new InvalidPatientDataException(Symptoms,value?? "null");
  }
  }
  private string _InsuranceId;

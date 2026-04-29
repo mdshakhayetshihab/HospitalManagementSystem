@@ -7,10 +7,8 @@ class EmergencyPatient : Patient,Itransferable
  get{return _EmergencyType;}
  private set
  {
-    if(value ==null)
-    throw new ArgumentNullException(nameof(EmergencyType));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Emergency type cannot be empty.",nameof(EmergencyType));
+ throw new InvalidPatientDataException("Emergency Type",value?? "null");
  _EmergencyType=value;
  }
  }
@@ -29,6 +27,9 @@ class EmergencyPatient : Patient,Itransferable
  }
  public void TransferTo(string department)
  {
- Console.WriteLine($"[Transper] Urgent : Moving {patientName} from ER to {department}");
+    Random rng=new Random();
+    if(rng.Next(0,3)==0)
+    throw new BedUnavailableException(department,20,20);
+ Console.WriteLine($"[Transper] Urgent : Moving {patientName} to {department}");
  }
 }
