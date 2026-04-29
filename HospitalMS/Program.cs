@@ -130,5 +130,7 @@ class EntryPoint
                 }
             }
         }
+        Console.WriteLine("\n======== Stack Trace Test========");
+        StackTraceTest.RunTest();
     }
 }
