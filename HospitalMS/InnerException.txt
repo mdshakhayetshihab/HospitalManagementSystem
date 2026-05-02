@@ -1,0 +1,43 @@
+static void Main()
+{
+    try
+    {
+        LoadPatientData();
+    }
+    catch (MedicareException ex)
+    {
+        Console.WriteLine("স্তর ১: " + ex.Message);
+        Console.WriteLine("স্তর ২: " + ex.InnerException.Message);
+        Console.WriteLine("স্তর ৩: " + ex.InnerException.InnerException.Message);
+    }
+}
+
+static void LoadPatientData()
+{
+    try
+    {
+        ConnectToServer();
+    }
+    catch (Exception e)
+    {
+        throw new MedicareException("Patient data load হয়নি।", e);
+    }
+}
+
+static void ConnectToServer()
+{
+    try
+    {
+        OpenDatabase();
+    }
+    catch (Exception e)
+    {
+        // এখানেও InnerException দিয়ে wrap করলাম
+        throw new Exception("Server connect হয়নি।", e);
+    }
+}
+
+static void OpenDatabase()
+{
+    throw new Exception("Database connect হয়নি।");  // মূল সমস্যা
+}
