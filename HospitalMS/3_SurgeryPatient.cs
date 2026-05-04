@@ -52,9 +52,10 @@ class SurgeryPatient : Patient,IInsurable,Itransferable,IBillable
  public void ProcessInsurableClaim()
  {
     if(Billamount<=0)
-    throw new InvalidOperationException($"Cannot process insurance for {patientName}: treatment has not been completed yet.");
- Console.WriteLine($"[Insurance] processing claim for {patientName}");
- Console.WriteLine($" Insurance Id: {InsuranceId} | calim Amount: BDT {Billamount:N0}");
+    throw new InsuranceClaimRejectedException(InsuranceId,Billamount,"Treatment not completed");
+    if(Billamount>20000)
+    throw new InsuranceClaimRejectedException(InsuranceId,Billamount,"Pre-authorized required for claims above BDT 20,000");
+    Console.WriteLine($"[Insurance] claim processed for {patientName}");
  }
  public string GetInsuranceDetails()
  {

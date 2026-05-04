@@ -18,10 +18,8 @@ class PediatricPatient : Patient,IInsurable
  get{return _GurdianName;}
  private set
  {
- if(value==null)
- throw new ArgumentNullException(nameof(GurdianName));
  if(string.IsNullOrWhiteSpace(value))
- throw new ArgumentException("Gurdian name cannot be empty",nameof(GurdianName));
+ throw new InvalidPatientDataException("Gurdian name",value??"null");
  _GurdianName=value;
  }
  }
@@ -42,6 +40,7 @@ id)
  }
  public void ProcessInsurableClaim()
  {
+    if(Billamount<0)
  Console.WriteLine($"[Insurance] processing claim for {patientName}");
  Console.WriteLine($" Insurance Id: {gInsuranceId} | calim Amount: BDT {Billamount}");
  }

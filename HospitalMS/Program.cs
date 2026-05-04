@@ -1,4 +1,5 @@
 ﻿using System;
+using Medicare;
 class EntryPoint
 {
     static void Main()
@@ -13,17 +14,17 @@ class EntryPoint
             admitted.Add(p1);
             Console.WriteLine($"[OK] Admitted:{p1.patientName} (ID: {p1.patientId})");
         }
-        catch(ArgumentNullException ex)
+        catch(InvalidPatientDataException ex)
         {
-            Console.WriteLine($"[Rejected] Missing required field: {ex.ParamName}");
+            Console.WriteLine($"[Rejected] Field: {ex.Fieldname},Value:{ex.InvalidValue}");
         }
-        catch(ArgumentOutOfRangeException ex)
+        catch(MedicareException ex)
         {
-            Console.WriteLine($"[Rejected] Value out of range: {ex.Message}");
+            Console.WriteLine($"[Hospital Error] {ex.Message}");
         }
-        catch(ArgumentException ex)
+        catch(Exception ex)
         {
-            Console.WriteLine($"[Rejected] invalid data: {ex.Message}");
+            Console.WriteLine($"[System Error] invalid data: {ex.Message}");
         }
         //Patient 2:Invalid
         try
@@ -31,13 +32,17 @@ class EntryPoint
             var p2=new EmergencyPatient("",102,"Cardiac arrest");
             admitted.Add(p2);
         }
-        catch(ArgumentNullException ex)
+        catch(InvalidPatientDataException ex)
         {
-            Console.WriteLine($"[Rejected] Missing field: {ex.ParamName}");
+            Console.WriteLine($"[Rejected] Missing field: {ex.Fieldname}, Value:{ex.InvalidValue}");
         }
-        catch(ArgumentException ex)
+        catch(MedicareException ex)
         {
-           Console.WriteLine($"[Rejected] {ex.Message}"); 
+           Console.WriteLine($"[Hospital Error] {ex.Message}"); 
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
         //Patient 3:valid
         try
@@ -46,9 +51,17 @@ class EntryPoint
             admitted.Add(p3);
             Console.WriteLine($"[OK] Admitted :{p3.patientName} (ID: {p3.patientId})");
         }
-        catch (ArgumentException ex)
+        catch (InvalidPatientDataException ex)
         {
-            Console.WriteLine($"[Rejected] {ex.Message}");
+            Console.WriteLine($"[Rejected] Field {ex.Fieldname}, Value: {ex.InvalidValue}");
+        }
+        catch(MedicareException ex)
+        {
+            Console.WriteLine($"[Hospital Error] {ex.Message}");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"[System Error] {ex.Message}");
         }
         //Patient 04:Invalid -negative ID
         try
@@ -56,13 +69,17 @@ class EntryPoint
             var p4=new PediatricPatient("Ayan",-5,"MRS.Nusrat","INS-P-004");
             admitted.Add(p4);
         }
-        catch(ArgumentOutOfRangeException ex)
+        catch(InvalidPatientDataException ex)
         {
-            Console.WriteLine($"[Rejected] out of range {ex.ParamName} = {ex.ActualValue}");
+            Console.WriteLine($"[Rejected] Field: {ex.Fieldname}, Value: {ex.InvalidValue}");
         }
-        catch(ArgumentException ex)
+        catch(MedicareException ex)
         {
-            Console.WriteLine($"[Rejected] {ex.Message}");
+            Console.WriteLine($"[Hospital Error] {ex.Message}");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"[System Error {ex.Message}]");
         }
         Console.WriteLine($"\nTotal admitted: {admitted.Count} out of 4 attempted.");
         Console.WriteLine("\n======== Treatment Reports========");
@@ -101,13 +118,21 @@ class EntryPoint
                     Insured.ProcessInsurableClaim();
                     Console.WriteLine($"[Claim] completed successfully.");
                 }
-                catch(InvalidOperationException ex)
+                catch(InsuranceClaimRejectedException ex)
                 {
-                    Console.WriteLine($"[Claim failed] {ex.Message}");
+                    Console.WriteLine($"[Claim Denied] {ex.Message}");
+                    Console.WriteLine($"Insurance: {ex.InsuranceId} | Amount: BDT {ex.ClaimAmount:N0}");
+                    Console.WriteLine($"Reason: {ex.Reason}");
+                    if(ex.InnerException!=null)
+                    Console.WriteLine($" Root Cause: {ex.InnerException.Message}");
+                }
+                catch(MedicareException ex)
+                {
+                    Console.WriteLine($"[Hospital Error] {ex.Message}");
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine($"[Claim Error] Unexpected: {ex.Message}");
+                    Console.WriteLine($"[System Error] {ex.Message}");
                 }
                 finally
                 {
@@ -127,20 +152,22 @@ class EntryPoint
                 {
                     transperable.TransferTo("ICU");
                 }
-                catch(InvalidOperationException ex)
+                catch(BedUnavailableException ex)
                 {
-                    Console.WriteLine($"[Transper Failed] {ex.Message}");
+                    Console.WriteLine($"[Transper Denied] {ex.Message}");
+                    Console.WriteLine($" Department: {ex.Department}");
+                    Console.WriteLine($" Occupancy: {ex.CurrentOccupancy}/{ex.Capacity}");
+                    Console.WriteLine($" Action: {p.patientName} placed on waiting list.");
                 }
-                catch(Exception ex)
+                catch(MedicareException ex)
                 {
                     Console.WriteLine($"[Transper Error] {ex.Message}");
                 }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"[System Error] {ex.Message}");
+                }
             }
         }
-        Console.WriteLine("\n======== Stack Trace Test========");
-        StackTraceTest.RunTest();
-        Console.WriteLine($"========Test finally========");
-        Console.WriteLine($"{FinallyReturn.TestFinallyReturn()}");
-    
     }
 }

@@ -8,6 +8,7 @@ class GeneralPatient:Patient,IInsurable
  {
     if(value==null)
     throw new InvalidPatientDataException(Symptoms,value?? "null");
+    _symptoms=value;
  }
  }
  private string _InsuranceId;
@@ -37,8 +38,16 @@ class GeneralPatient:Patient,IInsurable
  }
  public void ProcessInsurableClaim()
  {
- Console.WriteLine($"[Insurance] processing claim for {patientName}");
- Console.WriteLine($" Insurance Id: {InsuranceId} | calim Amount: BDT {Billamount}");
+      try
+      {
+         if(new Random().Next(0,4)==0)
+         throw new Exception("Database connection timeout");
+         Console.WriteLine($"[Insurance] claim processed for {patientName}");
+      }
+      catch(Exception ex)
+      {
+         throw new InsuranceClaimRejectedException($"Claim failed for {patientName} due to system error",ex);
+      }
  }
  public string GetInsuranceDetails()
  {

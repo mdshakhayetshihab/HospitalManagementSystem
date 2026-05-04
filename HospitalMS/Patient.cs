@@ -19,7 +19,7 @@ public Patient(string s,int PatientId)
 {
 patientName=s;
 if(PatientId<=0)
-throw new InvalidPatientDataException("PatientId",patientId);
+throw new InvalidPatientDataException("PatientId",PatientId);
 _patientId=PatientId;
 AdmissionDate=DateTime.Now;
 }
